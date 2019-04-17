@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--add apple meta data-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="cordova.js"></script>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+        <link rel="stylesheet" href="css/custom.css"/>
+    </head>
+    <!--data-role - -->
+    <body>
+        <div data-role="page" id="home" data-theme="b">
+            <div data-role="header">
+                <h1>Home</h1>
+                <a href="#menu" data-icon="bars" data-iconpos="notext" class="" data-theme="b" title="Menu">
+                    <span class="ui-btn-inner">
+                        <span class="ui-btn-text">Menu</span>
+                        <span class="uiicon ui-icon-bars ui-icon-shadow">&nbsp;</span>
+                    </span>
+                </a> 
+
+                <!--Insert two body classes --- Online / Offline -->
+
+                <!-- <div data-role="navbar">
+                    <ul>
+                        <li><a href="# " data-transition="none" data-icon="home">Home</a></li>
+                        <li><a href="# " data-transition="none" data-icon="plus">btn2</a></li>
+                        <li><a href="#" data-transition="none" data-icon="star">btn3</a></li>
+                    </ul>
+                </div> -->
+
+                <!--data theme "a" is white --- data theme "b" is black. -->
+                <!--jquery mobile can do the styling.-->
+            </div>
+            <div data-role="content">
+                <h3>Boom!</h3>
+                <p>This is my first app build… how easy is this!</p>
+            </div>
+        </div>
+    </body>
+
+    <!--min - minified. removes any unnecessary detailing in code, commands, spaces etcetera.-->
+    <!-- production requires minification, development does not for the moment.-->
+
+    <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script> <!--may need v2.2.2-->
+    <script src="js/jqm_defaults.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+
+    <!--Own custom JS file. Dependencies are loaded in first (^^ Jquery and any other .js files.)-->
+    <script type="text/javascript" src="js/main.js"></script>
+</html>
