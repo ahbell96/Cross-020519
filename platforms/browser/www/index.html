@@ -4,49 +4,58 @@
         <meta charset="utf-8">
         <!--add apple meta data-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="cordova.js"></script>
+        <!-- <link rel="stylesheet" href="css/themes/my-custom-theme.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" /> -->
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+        <link rel="stylesheet" href="css/theme-classic.css"/>
+        <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+        <link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/theme-classic/theme-classic.css" /> -->
         <link rel="stylesheet" href="css/custom.css"/>
+        <script type="text/javascript" src="cordova.js"></script>
     </head>
     <!--data-role - -->
-    <body>
-        <div data-role="page" id="home" data-theme="b">
-            <div data-role="header">
-                <h1>Home</h1>
-                <a href="#menu" data-icon="bars" data-iconpos="notext" class="" data-theme="b" title="Menu">
-                    <span class="ui-btn-inner">
-                        <span class="ui-btn-text">Menu</span>
-                        <span class="uiicon ui-icon-bars ui-icon-shadow">&nbsp;</span>
-                    </span>
-                </a> 
-
-                <!--Insert two body classes --- Online / Offline -->
-
-                <!-- <div data-role="navbar">
-                    <ul>
-                        <li><a href="# " data-transition="none" data-icon="home">Home</a></li>
-                        <li><a href="# " data-transition="none" data-icon="plus">btn2</a></li>
-                        <li><a href="#" data-transition="none" data-icon="star">btn3</a></li>
-                    </ul>
-                </div> -->
-
-                <!--data theme "a" is white --- data theme "b" is black. -->
-                <!--jquery mobile can do the styling.-->
+    <body class="online">
+        <div data-role="page" id="home" data-theme="a">
+            <div data-role="header" data-theme="a">
+                <h1>Sports Bar Locator</h1>
             </div>
-            <div data-role="content">
-                <h3>Boom!</h3>
-                <p>This is my first app build… how easy is this!</p>
+
+            <div id="offline" class="error">
+                <div>
+                    <h2>Error</h2>
+                    <p>You are currently in offline mode, restricting complete usability.</p>
+                    <p>For complete access to the app, Please enable a connection or try again later.</p>
+                </div>
+            </div>
+
+            <div class="currentBar" data-role="content" data-theme="a">
+                <h2>Currently at</h2>
+
+            </div>
+
+            <div class="onlineContent" data-role="content" data-theme="a">
+                <h2>Connected!</h2>
+                <h3>Online Content</h3>
+                <p>This will load up when the page has a web access!</p>
+                <!-- <p id="geolocation">Finding geolocation.... </p> -->
+                <button id="homeNetworkButton" data-icon="check">Internet Access Enabled</button>
+                <button id="clearStorageButton">Clear local storage</button>
+                <!--<button id="homeGPSButton">Load test Data</button>-->
+
+                <p id="data"></p>
+                <div class="mapContainer">
+                    <div id="mapCanvas"></div>
+                </div>
             </div>
         </div>
     </body>
 
-    <!--min - minified. removes any unnecessary detailing in code, commands, spaces etcetera.-->
-    <!-- production requires minification, development does not for the moment.-->
-
-    <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script> <!--may need v2.2.2-->
+    <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
     <script src="js/jqm_defaults.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-
-    <!--Own custom JS file. Dependencies are loaded in first (^^ Jquery and any other .js files.)-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ64OLcWIh76c_NAsjzgBiUklAMz6ZupY&libraries=places&callback=onDeviceReady" async defer></script>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuQiiy3S_pDUWy1T5rwakfsz74_WUFY7A&libraries=places"></script> -->
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuQiiy3S_pDUWy1T5rwakfsz74_WUFY7A&callback=initMap"type="text/javascript"></script>-->
+    <script type="text/javascript" src="js/geolocation-marker.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </html>
