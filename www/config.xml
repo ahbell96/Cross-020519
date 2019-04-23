@@ -6,12 +6,17 @@
     version     = "1.0.0" >
     
     <!-- versionCode is optional and Android only -->
-    <name>My CPD APP</name>
+    <name>Sports Bar Locator</name>
     <description>
-        this is my description app.
+        Sports Bar locator, where the user is able to take pictures and or videos when at at a bar they are currently at,
+        whilst also able to locate one within the local area, depending on where they are.
+        If the user is within a certain amount of yards from the bar, then they will be within that current bar. 
+        This is shown on the app, where the user can then immediately take pictures of videos to capture the moment.
+        Thereafter, the user is able to see where they were previously and see the content they produced on that night.
+        This can be done through local storage.
     </description> 
     <author href="website" email="15565106@students.lincoln.ac.uk">
-        Andrew
+        Andrew B
     </author>
 	<!--
       This allows your app to load assets from all *.phongap.com domains
@@ -56,6 +61,17 @@
 	-->
 	
     <!-- Core plugins -->
+
+    <!-- Camera -->
+    <plugin name="cordova-plugin-camera">
+        <param name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera"/>
+        <param name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="App would like to access the librar"/>
+    </plugin>
+    <!-- Camera -->
+
+    <!-- ADD Video-->
+
+    <!-- ADD Video-->
 
     <plugin name="cordova-plugin-console"/> 
     <!--> used to adds functional information within the console.log for ios, android etc -->
