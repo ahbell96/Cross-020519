@@ -2,12 +2,26 @@
 
 // https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-dialogs/
 
+// Variables
+var onlineConnection = window.navigator.onLine;
+var currentPosition, point;
+var map;
+var service;
+var infowindow;
+var pictureSource, pictureDestination;
+var cameraOptions = {
+  quality: 50,
+  destinationType: Camera.destinationType.DATA_URL
+}
+
 document.addEventListener("deviceready", onDeviceReady, false);
 
  function onDeviceReady() {
      console.log("onDeviceReady: device ready.");
      initialise();
      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+     document.getElementById("takePicture").addEventListener("click", cameraTakePicture);
+     // maybe add cleanup option in case it gets to cluttered for when viewing pictures on app? camera.Cleanup();
 }
 
 $(document).ready(function () {
@@ -15,13 +29,6 @@ $(document).ready(function () {
     initialise();
     
 });
-
-// Variables
-var onlineConnection = window.navigator.onLine;
-var currentPosition, point;
-var map;
-var service;
-var infowindow;
 
 // Functions
 // ---------- IF ONLINE OR OFFLINE ------------
@@ -167,91 +174,22 @@ function createMarkers(places) {
   }
   map.fitBounds(bounds);
 }
-// --------- Search for near bars ------------------//
-/*
-function searchBars(point,map) {
-  alert ('open search bar');
-    infowindow = new google.maps.InfoWindow();
 
-  map = new google.maps.Map(
-      document.getElementById('map'), {center: point, zoom: 15});
+// ---------- GOOGLE MAPS ---------------
 
-  var request = {
-    location: point,
-    query: 'tourist attractions',
-    radius: '2000'
-   // fields: ['name', 'geometry'],
-  };
+// ---------- CAMERA API ----------------
 
-  service = new google.maps.places.PlacesService(map);
-alert('before loop');
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-       alert('create marker loop');
-        createMarker(results[i]);
-      }
+function cameraTakePicture() {
+  navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
 
-      map.setCenter(results[0].geometry.location);
-    }
-    else{
-      alert('Error with place service status' + status);
-    }
-  };
+  function cameraSuccess(imageData) {
+    var image = document.getElementById('myImage');
+    image.src = "data:image/jpeg;base64" + imageData; // data type.
+  }
+  
+  function cameraError() {
 
+  }
+}
 
-
-function createMarker(place) {
-  alert('pointer place location');
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}*/
-
-// --------- GETTING CURRENT LOCATION ----------
-
-
-
-// function calcRoute(end) {
-//   navigator.geolocation.getCurrentPosition(function(pos) {
-//     var start = new google.maps.LatLng(pos.coords.latitiude,
-//       pos.coords.longitude);
-
-//     var request = {
-//       origin: start,
-//       destination: end,
-//       travelMode: google.maps.TravelMode.DRIVING
-//     };
-
-//     directionsService.route(request, function(response, status) {
-
-//       if (status == google.maps.DirectionsStatus.OK) {
-
-//         directionsDisplay.setDirections(response);
-//       } 
-//       else alert("Directions request failed: " + status);
-//     });
-//   }, 
-//   function(err) {
-    
-//     alert('ERROR(' + err.code + '): ' + err.message + " using default address (Baltimore, MD)");
-    
-//     var request = {
-//       origin: "Baltimore, MD",
-//       destination: end,
-//       travelMode: google.maps.TravelMode.DRIVING
-//     };
-
-//     directionsService.route(request, function(response, status) {
-//       if (status == google.maps.DirectionsStatus.OK) {
-//         directionsDisplay.setDirections(response);
-//       } 
-//       else alert("Directions request failed: " + status);
-//     });
-//   });
-// }
+// ---------- CAMERA API ----------------
