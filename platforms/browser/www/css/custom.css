@@ -1,3 +1,49 @@
-#home {
-    background-color: cyan;
+
+body {
+    background-color:lightgray;
+}
+
+div {
+    margin:0 auto;
+    width:auto;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    width:auto;
+    
+}
+
+body.online #offline {
+    display:none;
+}
+
+.error {
+    background-color: red;
+    margin:0 auto;
+    text-align: center;
+}
+
+.currentBar {
+    border-bottom: 1px solid black;
+    margin:0 10%;
+}
+
+.onlineContent {
+    margin:0 auto;
+    width:auto;
+    text-align: center;
+}
+
+.mapContainer {
+    margin:0 auto;
+    height:300px;
+    width:300px;
+}
+
+#mapCanvas {
+    position: relative;
+    width:300px;
+    height:300px;
 }
