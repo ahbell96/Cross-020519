@@ -1,6 +1,7 @@
 
 body {
     background-color:lightgray;
+    margin:0 auto;
 }
 
 div {
@@ -12,6 +13,7 @@ div {
 h1 {
     text-align: center;
     width:auto;
+    margin: 0 auto;
     
 }
 
@@ -39,11 +41,11 @@ body.online #offline {
 .mapContainer {
     margin:0 auto;
     height:300px;
-    width:300px;
+    width:90%;
 }
 
 #mapCanvas {
     position: relative;
-    width:300px;
+    width:90%;
     height:300px;
 }

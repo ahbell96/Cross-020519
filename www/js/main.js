@@ -3,6 +3,8 @@
 // https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-dialogs/
 
 // Variables
+var map;
+var service;
 var onlineConnection = window.navigator.onLine;
 var currentPosition, point;
 var map;
@@ -11,7 +13,9 @@ var infowindow;
 var pictureSource, pictureDestination;
 var cameraOptions = {
   quality: 50,
-  destinationType: Camera.destinationType.DATA_URL
+  destinationType: Camera.destinationType.DATA_URL,
+  sourceType: Camera.PictureSource.SAVEDPHOTOALBUM,
+  popoverOptions: popover
 }
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -19,8 +23,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
  function onDeviceReady() {
      console.log("onDeviceReady: device ready.");
      initialise();
-     navigator.geolocation.getCurrentPosition(onSuccess, onError);
      document.getElementById("takePicture").addEventListener("click", cameraTakePicture);
+     navigator.geolocation.getCurrentPosition(onSuccess, onError);
      // maybe add cleanup option in case it gets to cluttered for when viewing pictures on app? camera.Cleanup();
 }
 
@@ -92,7 +96,9 @@ function onSuccess(position) {
       position.coords.longitude);
     //var UOL = new google.maps.LatLng(53.230, 0.5400);
     
-    infowindow = new google.maps.InfoWindow();
+    infowindow = new google.maps.InfoWindow({
+
+    });
   
     map = new google.maps.Map(
         document.getElementById('mapCanvas'), {
@@ -135,10 +141,6 @@ function onError(error) {
     'message: ' + error.message + '\n');
 }
 
-var map;
-var service;
-var infowindow;
-
 function initMap() {
   var sydney = new google.maps.LatLng(-33.867, 151.195);
 
@@ -152,11 +154,12 @@ function initMap() {
 
 function createMarkers(places) {
   var bounds = new google.maps.LatLngBounds();
+  var infowindow = new google.maps.InfoWindow();
   var placesList = document.getElementById('places');
 
   for (var i = 0, place; place = places[i]; i++) {
     var image = {
-      url: place.icon,
+      //url: place.icon,
       size: new google.maps.Size(71, 71),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -169,6 +172,22 @@ function createMarkers(places) {
       title: place.name,
       position: place.geometry.location
     });
+
+    marker.addListener('click', function() {
+      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                  'Place ID: ' + place.place_id + '<br>' +
+                  place.formatted_address + '</div>');
+                infowindow.open(map, marker);
+    });
+
+    // google.maps.event.addListener(marker, 'click', function() { 
+    //   console.log(place.place_id);
+    //           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+    //             'Place ID: ' + place.place_id + '<br>' +
+    //             place.formatted_address + '</div>');
+    //           infowindow.open(map, this);
+    //         });
+
   
     bounds.extend(place.geometry.location);
   }
@@ -182,13 +201,16 @@ function createMarkers(places) {
 function cameraTakePicture() {
   navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
 
+
   function cameraSuccess(imageData) {
     var image = document.getElementById('myImage');
     image.src = "data:image/jpeg;base64" + imageData; // data type.
+
+
   }
   
   function cameraError() {
-
+    alert('camera exit or failure');
   }
 }
 
