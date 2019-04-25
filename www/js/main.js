@@ -122,7 +122,6 @@ function onSuccess(position) {
       if (status !== 'OK') return;
       alert('Marker');
       createMarkers(results);
-     
     });
 
      // appending data to the geolocation id in html.
@@ -152,19 +151,19 @@ function initMap() {
  
 }
 
-function createMarkers(places) {
+function createMarkers(place) {
   var bounds = new google.maps.LatLngBounds();
   var infowindow = new google.maps.InfoWindow();
-  var placesList = document.getElementById('places');
+  //var placesList = document.getElementById('places');
 
-  for (var i = 0, place; place = places[i]; i++) {
-    var image = {
-      //url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25)
-    };
+  // for (var i = 0, place; place = places[i]; i++) {
+  //   var image = {
+  //     //url: place.icon,
+  //     size: new google.maps.Size(71, 71),
+  //     origin: new google.maps.Point(0, 0),
+  //     anchor: new google.maps.Point(17, 34),
+  //     scaledSize: new google.maps.Size(25, 25)
+  //   };
 
     var marker = new google.maps.Marker({
       map: map,
@@ -174,10 +173,12 @@ function createMarkers(places) {
     });
 
     marker.addListener('click', function() {
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                  'Place ID: ' + place.place_id + '<br>' +
-                  place.formatted_address + '</div>');
-                infowindow.open(map, marker);
+      infowindow.setContent(places.name);
+      infowindow.open(map,this);
+      // infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+      //             'Place ID: ' + place.place_id + '<br>' +
+      //             place.formatted_address + '</div>');
+      //           infowindow.open(map, marker);
     });
 
     // google.maps.event.addListener(marker, 'click', function() { 
@@ -205,8 +206,6 @@ function cameraTakePicture() {
   function cameraSuccess(imageData) {
     var image = document.getElementById('myImage');
     image.src = "data:image/jpeg;base64" + imageData; // data type.
-
-
   }
   
   function cameraError() {
