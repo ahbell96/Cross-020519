@@ -30,7 +30,6 @@ document.addEventListener("deviceready", onDeviceReady, false);
 $(document).ready(function () {
     console.log(".ready: ready")
     initialise();
-
 });
 
 // Functions
@@ -220,8 +219,6 @@ function cameraTakePicture() {
   function cameraSuccess(imageData) {
     var image = document.getElementById('myImage');
     image.src = "data:image/jpeg;base64" + imageData; // data type.
-
-
   }
 
   function cameraError() {
