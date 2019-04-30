@@ -8,7 +8,7 @@ var service;
 var onlineConnection = window.navigator.onLine;
 var currentPosition, point;
 var infowindow;
-var markers = xml.documentElement.getElementsByTagName("marker");
+//var markers = xml.documentElement.getElementsByTagName("marker");
 var pictureSource, pictureDestination;
 var cameraOptions = {
   quality: 50,
@@ -121,21 +121,21 @@ function onSuccess(position) {
     });
 
      // appending data to the geolocation id in html.
-     element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                         'Longitude: '          + position.coords.longitude             + '<br />' +
-                         'Altitude: '           + position.coords.altitude              + '<br />' +
-                         'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                         'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                         'Heading: '            + position.coords.heading               + '<br />' +
-                         'Speed: '              + position.coords.speed                 + '<br />' +
-                         'Timestamp: '          + new Date(position.timestamp)          + '<br />';
+    //  element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+    //                      'Longitude: '          + position.coords.longitude             + '<br />' +
+    //                      'Altitude: '           + position.coords.altitude              + '<br />' +
+    //                      'Accuracy: '           + position.coords.accuracy              + '<br />' +
+    //                      'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+    //                      'Heading: '            + position.coords.heading               + '<br />' +
+    //                      'Speed: '              + position.coords.speed                 + '<br />' +
+    //                      'Timestamp: '          + new Date(position.timestamp)          + '<br />';
 }
 
 // results passed through to create a marker.
 function createMarkers(places, point) {
   var bounds = new google.maps.LatLngBounds();
   //var infowindow = new google.maps.InfoWindow(); // making new info window
-  var place, places;
+  var place;
 
   infoWindowCurrentPlace = new google.maps.InfoWindow({
     content: 'you are here'
@@ -162,8 +162,6 @@ function createMarkers(places, point) {
 
     infowindow = new google.maps.InfoWindow({
     });
-
-    for (var i = 0; i < location.length)
 
     var marker = new google.maps.Marker({
       map: map,
