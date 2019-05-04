@@ -8,6 +8,7 @@ var service;
 var onlineConnection = window.navigator.onLine;
 var currentPosition, point;
 var infowindow;
+var places = [];
 //var markers = xml.documentElement.getElementsByTagName("marker");
 var pictureSource, pictureDestination;
 var cameraOptions = {
@@ -131,6 +132,13 @@ function onSuccess(position) {
     //                      'Timestamp: '          + new Date(position.timestamp)          + '<br />';
 }
 
+function bindInfoWindow(marker, map, infowindow, html) {
+  marker.addListener('click', function() {
+      infowindow.setContent(html);
+      infowindow.open(map, this);
+  });
+}
+
 // results passed through to create a marker.
 function createMarkers(places, point) {
   var bounds = new google.maps.LatLngBounds();
@@ -151,7 +159,14 @@ function createMarkers(places, point) {
     console.log(currentMarker);
             infoWindowCurrentPlace.open(map, this);
           });
+  
+  var infowindow = new google.maps.InfoWindow({
+  });
+  
   for (var i = 0, place; place = places[i]; i++) {
+    //alert(place + ' ' + places);
+    //console.log(place);
+
     var image = {
       url: place.icon,
       size: new google.maps.Size(71, 71),
@@ -160,9 +175,6 @@ function createMarkers(places, point) {
       scaledSize: new google.maps.Size(25, 25)
     };
 
-    infowindow = new google.maps.InfoWindow({
-    });
-
     var marker = new google.maps.Marker({
       map: map,
       icon: image,
@@ -170,21 +182,19 @@ function createMarkers(places, point) {
       name: place.name,
       position: place.geometry.location
     });
-
+console.log('1' + marker);
     // marker.addListener('click', function() {
     //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
     //               'Place ID: ' + place.place_id + '<br>' +
     //               place.formatted_address + '</div>');
     //             infowindow.open(map, marker);
     // });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      console.log(marker);
-              infowindow.setContent('<div><strong>' + marker.name + '</strong><br>');
-              infowindow.open(map, this);
-            });
-
-
+    bindInfoWindow(marker, map, infowindow, marker.name); 
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   console.log('2' + marker);
+    //   infowindow.setContent('<div><strong>' + marker.name + '</strong><br>');
+    //   infowindow.open(map, this);
+    // });
     bounds.extend(place.geometry.location);
   }
   map.fitBounds(bounds);
