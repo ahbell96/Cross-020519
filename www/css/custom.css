@@ -4,17 +4,26 @@ body {
     margin:0 auto;
 }
 
+.container {
+    max-width:90%;
+    margin:0 auto;
+}
+
 div {
     margin:0 auto;
     width:auto;
     text-align: center;
 }
 
+.ui-header {
+    background-color: #72007a;
+}
+
 h1 {
     text-align: center;
     width:auto;
     margin: 0 auto;
-    
+    color:whitesmoke;
 }
 
 body.online #offline {
@@ -29,13 +38,34 @@ body.online #offline {
 
 .currentBar {
     border-bottom: 1px solid black;
-    margin:0 10%;
+    margin:0 auto;
 }
 
 .onlineContent {
     margin:0 auto;
     width:auto;
     text-align: center;
+}
+
+.mediaContainer {
+    margin:0 auto;
+    padding:0;
+}
+
+#takePicture {
+    display:inline-block;
+    width:0;
+    padding:1.5em;
+}
+
+#takeVideo {
+    display:inline-block;
+    width:0;
+    padding:1.5em;
+}
+
+.barSearchContainer {
+    width:50%;
 }
 
 .mapContainer {

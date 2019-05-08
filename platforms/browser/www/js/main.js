@@ -24,6 +24,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
      console.log("onDeviceReady: device ready.");
      initialise();
      document.getElementById("takePicture").addEventListener("click", cameraTakePicture);
+     document.getElementById("takeVideo").addEventListener("click", videoCapture);
      navigator.geolocation.getCurrentPosition(onSuccess, onError);
      // maybe add cleanup option in case it gets to cluttered for when viewing pictures on app? camera.Cleanup();
 }
@@ -61,9 +62,9 @@ $('body').addClass('online'); // add the online content.
 // ---------- IF ONLINE OR OFFLINE ------------
 
 function setup() {
-    var trackingID = '';
-    var watchID = null;
-    var trackingData = [];
+    // var trackingID = '';
+    // var watchID = null;
+    // var trackingData = [];
 
     // if the device is offline ...
     if(window.navigator.offLine) {
@@ -90,15 +91,11 @@ function setup() {
 
 function onSuccess(position) {
      // this function is called when the location has successfully been called.
-     var element = document.getElementById('geolocation');
+    //  var element = document.getElementById('geolocation');
      // point = current location.
      var point = new google.maps.LatLng(position.coords.latitude,
       position.coords.longitude);
     //var UOL = new google.maps.LatLng(53.230, 0.5400);
-
-    // infowindow = new google.maps.InfoWindow({
-    //   content: 'test content'
-    // });
 
     map = new google.maps.Map(
         document.getElementById('mapCanvas'), {
@@ -109,8 +106,9 @@ function onSuccess(position) {
     // change current marker icon.
 
     var request = {
-      location: point, radius: 500, type: ['bar']
+      location: point, radius: 1000, type: ['bar']
     };
+    
    var service = new google.maps.places.PlacesService(map);
     service.nearbySearch(
     request,
@@ -118,18 +116,7 @@ function onSuccess(position) {
       if (status !== 'OK') return;
       alert('Marker');
       createMarkers(results, point); // creates markers from query given from request.
-
     });
-
-     // appending data to the geolocation id in html.
-    //  element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-    //                      'Longitude: '          + position.coords.longitude             + '<br />' +
-    //                      'Altitude: '           + position.coords.altitude              + '<br />' +
-    //                      'Accuracy: '           + position.coords.accuracy              + '<br />' +
-    //                      'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-    //                      'Heading: '            + position.coords.heading               + '<br />' +
-    //                      'Speed: '              + position.coords.speed                 + '<br />' +
-    //                      'Timestamp: '          + new Date(position.timestamp)          + '<br />';
 }
 
 function bindInfoWindow(marker, map, infowindow, html) {
@@ -144,29 +131,21 @@ function createMarkers(places, point) {
   var bounds = new google.maps.LatLngBounds();
   //var infowindow = new google.maps.InfoWindow(); // making new info window
   var place;
-
   infoWindowCurrentPlace = new google.maps.InfoWindow({
     content: 'you are here'
   })
-
   var currentMarker = new google.maps.Marker({
     position: point,
     map: map,
     title: 'You are here'
   });
-
   google.maps.event.addListener(currentMarker, 'click', function() {
     console.log(currentMarker);
             infoWindowCurrentPlace.open(map, this);
           });
-  
   var infowindow = new google.maps.InfoWindow({
   });
-  
   for (var i = 0, place; place = places[i]; i++) {
-    //alert(place + ' ' + places);
-    //console.log(place);
-
     var image = {
       url: place.icon,
       size: new google.maps.Size(71, 71),
@@ -174,7 +153,6 @@ function createMarkers(places, point) {
       anchor: new google.maps.Point(17, 34),
       scaledSize: new google.maps.Size(25, 25)
     };
-
     var marker = new google.maps.Marker({
       map: map,
       icon: image,
@@ -182,19 +160,7 @@ function createMarkers(places, point) {
       name: place.name,
       position: place.geometry.location
     });
-console.log('1' + marker);
-    // marker.addListener('click', function() {
-    //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-    //               'Place ID: ' + place.place_id + '<br>' +
-    //               place.formatted_address + '</div>');
-    //             infowindow.open(map, marker);
-    // });
-    bindInfoWindow(marker, map, infowindow, marker.name); 
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   console.log('2' + marker);
-    //   infowindow.setContent('<div><strong>' + marker.name + '</strong><br>');
-    //   infowindow.open(map, this);
-    // });
+    bindInfoWindow(marker, map, infowindow, marker.name); // used to add individual infoWindows.
     bounds.extend(place.geometry.location);
   }
   map.fitBounds(bounds);
@@ -235,3 +201,29 @@ function cameraTakePicture() {
 }
 
 // ---------- CAMERA API ----------------
+
+// ---------- VIDEO API ----------------
+//https://www.tutorialspoint.com/cordova/cordova_media_capture.htm
+
+
+function videoCapture() {
+  var options = {
+     limit: 1,
+     duration: 10
+  };
+  navigator.device.capture.captureVideo(onSuccess, onError, options);
+
+  function onSuccess(mediaFiles) {
+     var i, path, len;
+     for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+        path = mediaFiles[i].fullPath;
+        console.log(mediaFiles);
+     }
+  }
+
+  function onError(error) {
+     navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+  }
+}
+
+// ---------- VIDEO API ----------------

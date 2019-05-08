@@ -13,39 +13,39 @@
             <div data-role="header" data-theme="a">
                 <h1>Sports Bar Locator</h1>
             </div>
+            <div class="container">
             <div id="offline" class="error">
-                <div>
-                    <h2>Error</h2>
-                    <p>You are currently in offline mode, restricting complete usability.</p>
-                    <p>For complete access to the app, Please enable a connection or try again later.</p>
-                </div>
-            </div>
-            <div id="online" class="connected">
-                <h3>Connected!</h3>
-            </div>
-            <div class="currentBar" data-role="content" data-theme="a">
-                <h2>Currently at</h2>
-                <p>*Insert Location of which bar they are currently at*</p>
-                <p>if the person if within 5 yards of the location, then they will be in the location and it should appear.</p>
-
-            </div>
-            <div class="onlineContent" data-role="content" data-theme="a">
-                <div class="barSearchContainer"></div>
-                <label>
-                    <input class="inputText" type="text" name="postcode" value="">
-                    <span>enter your postcode</span> 
-                </label>
-                <!-- <p id="geolocation">Finding geolocation.... </p> -->
-                <div class="pictureContainer">
                     <div>
-                        <button id="takePicture" data-icon="camera"></button>
-                        <img id="myImage"></img>
+                        <h2>Error</h2>
+                        <p>You are currently in offline mode, restricting complete usability.</p>
+                        <p>For complete access to the app, Please enable a connection or try again later.</p>
                     </div>
                 </div>
-                <p id="data"></p>
-                <div class="mapContainer">
-                    <div id="mapCanvas">
-                        <!-- Automatically added via js -->
+                <div id="online" class="connected">
+                    <h3>Connected!</h3>
+                </div>  
+                <div class="onlineContent" data-role="content" data-theme="a">
+                        <div class="mediaContainer">
+                            <h3>Take a Picture!</h3>
+                            <button id="takePicture" data-icon="camera"></button>
+                            <img id="myImage"></img>
+                        </div>
+                        <div class="mediaContainer">
+                            <h3>Capture the Moment!</h3>
+                            <button id="takeVideo" data-icon="video"></button>
+                        </div>
+                        <p id="data"></p>
+                    <div class="barSearchContainer">
+                        <label>
+                            <span>enter your postcode</span> 
+                            <input class="inputText" type="text" name="postcode" value="">
+                        </label>
+                    </div>
+                    <!-- <p id="geolocation">Finding geolocation.... </p> -->
+                    <div class="mapContainer">
+                        <div id="mapCanvas">
+                            <!-- Automatically added via js -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,8 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ64OLcWIh76c_NAsjzgBiUklAMz6ZupY&libraries=places&callback=onDeviceReady" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ64OLcWIh76c_NAsjzgBiUklAMz6ZupY&libraries=places&callback=onDeviceReady" async defer></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXo2owjSJmFNxgh_d8ZJFENgvzSPQavDw&libraries=places&callback=onDeviceReady" async defer></script>
     <script type="text/javascript" src="js/geolocation-marker.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </html>
