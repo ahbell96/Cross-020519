@@ -2,6 +2,11 @@
 
 // https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-dialogs/
 
+// references
+//https://stackoverflow.com/questions/9475830/google-maps-api-v3-markers-all-share-the-same-infowindow
+//https://developers.google.com/maps/documentation/javascript/places
+
+
 // Variables
 var map;
 var service;

@@ -1,0 +1,81 @@
+
+body {
+    background-color:lightgray;
+    margin:0 auto;
+}
+
+.container {
+    max-width:90%;
+    margin:0 auto;
+}
+
+div {
+    margin:0 auto;
+    width:auto;
+    text-align: center;
+}
+
+.ui-header {
+    background-color: #72007a;
+}
+
+h1 {
+    text-align: center;
+    width:auto;
+    margin: 0 auto;
+    color:whitesmoke;
+}
+
+body.online #offline {
+    display:none;
+}
+
+.error {
+    background-color: red;
+    margin:0 auto;
+    text-align: center;
+}
+
+.currentBar {
+    border-bottom: 1px solid black;
+    margin:0 auto;
+}
+
+.onlineContent {
+    margin:0 auto;
+    width:auto;
+    text-align: center;
+}
+
+.mediaContainer {
+    margin:0 auto;
+    padding:0;
+}
+
+#takePicture {
+    display:inline-block;
+    width:0;
+    padding:1.5em;
+}
+
+#takeVideo {
+    display:inline-block;
+    width:0;
+    padding:1.5em;
+}
+
+.barSearchContainer {
+    width:50%;
+}
+
+.mapContainer {
+    margin:0 auto;
+    height:300px;
+    width:90%;
+}
+
+#mapCanvas {
+    position: relative;
+    width:90%;
+    height:300px;
+}
